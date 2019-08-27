@@ -1,7 +1,10 @@
 package com.site.blog.my.core.controller.admin;
 
 import com.site.blog.my.core.entity.AdminUser;
+import com.site.blog.my.core.redis.RedisService;
 import com.site.blog.my.core.service.*;
+import com.site.blog.my.core.util.Utils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
@@ -30,7 +33,8 @@ public class AdminController {
     private TagService tagService;
     @Resource
     private CommentService commentService;
-
+    @Autowired
+    private RedisService redisService;
 
     @GetMapping({"/login"})
     public String login() {
@@ -41,7 +45,6 @@ public class AdminController {
     public String test() {
         return "admin/test";
     }
-
 
     @GetMapping({"", "/", "/index", "/index.html"})
     public String index(HttpServletRequest request) {
@@ -59,7 +62,8 @@ public class AdminController {
     public String login(@RequestParam("userName") String userName,
                         @RequestParam("password") String password,
                         @RequestParam("verifyCode") String verifyCode,
-                        HttpSession session) {
+                        HttpServletRequest request) {
+        HttpSession session = request.getSession();
         if (StringUtils.isEmpty(verifyCode)) {
             session.setAttribute("errorMsg", "验证码不能为空");
             return "admin/login";
@@ -74,6 +78,7 @@ public class AdminController {
             return "admin/login";
         }
         AdminUser adminUser = adminUserService.login(userName, password);
+        redisService.setBackUser(String.valueOf(adminUser.getAdminUserId()), Utils.getIp(request));
         if (adminUser != null) {
             session.setAttribute("loginUser", adminUser.getNickName());
             session.setAttribute("loginUserId", adminUser.getAdminUserId());

@@ -1,5 +1,6 @@
 package com.site.blog.my.core.redis;
 
+import org.springframework.data.annotation.Id;
 import org.springframework.data.redis.core.*;
 import org.springframework.stereotype.Service;
 
@@ -29,4 +30,14 @@ public class RedisService {
     
     @Resource
     private ZSetOperations<String, String> zsetOps;
+
+    /**
+     * 后台ip信息录入
+     * @param uid
+     * @param ip
+     */
+    public void setBackUser(String uid,String ip)
+    {
+        hashOps.put(RedisKey.HBACK_USER,uid,ip);
+    }
 }
