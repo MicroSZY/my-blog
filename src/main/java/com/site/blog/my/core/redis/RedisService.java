@@ -40,4 +40,16 @@ public class RedisService {
     {
         hashOps.put(RedisKey.HBACK_USER,uid,ip);
     }
+
+    /**
+     * @description  验证码
+     * @param: key
+     * @param: value
+     * @return void
+     * @author YY
+     * @date 2019/9/21/021
+     */
+    public void putStringValue(String key, String value) throws Exception {
+        valueOps.set(key, value);
+    }
 }
