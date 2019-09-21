@@ -80,7 +80,7 @@
     </appenders>
     <loggers>
         <logger name="org.springframework" level="INFO"/>
-        <logger name="org.mybatis" level="INFO"/>
+        <logger name="org.mybatis" level="DEBUG"/>
         <root level="info">
             <appender-ref ref="Console"/>
             <appender-ref ref="debugLog"/>
