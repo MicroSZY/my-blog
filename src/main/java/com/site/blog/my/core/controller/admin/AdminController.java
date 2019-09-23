@@ -7,6 +7,7 @@ import com.site.blog.my.core.service.*;
 import com.site.blog.my.core.util.Utils;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -27,7 +28,7 @@ import java.util.Random;
  * @date 2019/08/21
  */
 @Log4j2
-@RestController
+@Controller
 @RequestMapping("/admin")
 public class AdminController {
 
@@ -78,6 +79,7 @@ public class AdminController {
     }
 
     @RequestMapping("verifyCode")
+    @ResponseBody
     public ModelAndView handleRequest(HttpServletRequest request,
                                       HttpServletResponse response, String username) throws Exception
     {
