@@ -18,6 +18,7 @@ public class MyBlogWebMvcConfigurer implements WebMvcConfigurer {
         registry.addInterceptor(adminLoginInterceptor)
                 .addPathPatterns("/admin/**")
                 .excludePathPatterns("/admin/login")
+                .excludePathPatterns("/admin/verifyCode")
                 .excludePathPatterns("/admin/dist/**")
                 .excludePathPatterns("/admin/plugins/**");
     }
