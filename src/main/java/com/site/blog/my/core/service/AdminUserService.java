@@ -2,6 +2,8 @@ package com.site.blog.my.core.service;
 
 import com.site.blog.my.core.entity.AdminUser;
 
+import javax.servlet.http.HttpServletRequest;
+
 public interface AdminUserService {
 
     AdminUser login(String userName, String password);
@@ -33,5 +35,15 @@ public interface AdminUserService {
      * @return
      */
     Boolean updateName(Integer loginUserId, String loginUserName, String nickName);
+
+    /**
+     * @description  获取token
+     * @param: adminUser 
+     * @param: request
+     * @return java.lang.String 
+     * @author YY
+     * @date 2019/9/23/023 
+     */
+    String getToken(AdminUser adminUser, HttpServletRequest request);
 
 }

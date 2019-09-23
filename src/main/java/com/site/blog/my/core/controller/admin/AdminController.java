@@ -1,5 +1,6 @@
 package com.site.blog.my.core.controller.admin;
 
+import com.site.blog.my.core.common.MyResult;
 import com.site.blog.my.core.common.exception.MyException;
 import com.site.blog.my.core.config.Constants;
 import com.site.blog.my.core.entity.AdminUser;
@@ -160,6 +161,28 @@ public class AdminController {
             e.printStackTrace();
         }
         return null;
+    }
+
+    @RequestMapping("loginNew")
+    public MyResult loginNew(String username,String password, String verifyCode,HttpServletRequest request){
+        if (StringUtils.isEmpty(verifyCode)) {
+            throw new MyException(HttpStatus.INTERNAL_SERVER_ERROR.value(), "验证码z不能为空");
+        }
+        if (StringUtils.isEmpty(username) || StringUtils.isEmpty(password)) {
+            throw new MyException(HttpStatus.INTERNAL_SERVER_ERROR.value(), "用户名或密码不能为空");
+        }
+        String kaptchaCode = redisService.getStringValue(Constants.C_CODE + "." + username);
+        if (StringUtils.isEmpty(kaptchaCode) || !verifyCode.equals(kaptchaCode)) {
+            throw new MyException(HttpStatus.INTERNAL_SERVER_ERROR.value(), "验证码错误");
+        }
+        AdminUser user = adminUserService.login(username,password);
+        if (user != null) {
+            throw new MyException(HttpStatus.INTERNAL_SERVER_ERROR.value(),"账号或密码错误！！！");
+        } else {
+            redisService.setBackUser(String.valueOf(user.getAdminUserId()), Utils.getIp(request));
+        }
+        String token = adminUserService.getToken(user,request);
+        return new MyResult(token);
     }
 
     @PostMapping(value = "/login")

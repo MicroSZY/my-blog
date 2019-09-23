@@ -1,6 +1,5 @@
 package com.site.blog.my.core.redis;
 
-import org.springframework.data.annotation.Id;
 import org.springframework.data.redis.core.*;
 import org.springframework.stereotype.Service;
 
@@ -51,5 +50,16 @@ public class RedisService {
      */
     public void putStringValue(String key, String value) throws Exception {
         valueOps.set(key, value);
+    }
+
+    /**
+     * @description  验证码
+     * @param: key
+     * @return String
+     * @author YY
+     * @date 2019/9/21/021
+     */
+    public String getStringValue(String key){
+        return valueOps.get(key);
     }
 }

@@ -14,4 +14,5 @@ public class AdminUser {
 
     private Byte locked;
 
+    private String token;
 }
