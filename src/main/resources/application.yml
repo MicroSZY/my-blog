@@ -13,7 +13,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://132.232.115.11:3306/my_blog_db?useUnicode=true&characterEncoding=utf8&autoReconnect=true&useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
     username: root
-    password: shen853323110.  
+    password: shen853323110.
     hikari:
       minimum-idle: 5
       maximum-pool-size: 15

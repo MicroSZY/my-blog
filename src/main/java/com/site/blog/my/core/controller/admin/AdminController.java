@@ -1,5 +1,6 @@
 package com.site.blog.my.core.controller.admin;
 
+import com.site.blog.my.core.common.exception.MyException;
 import com.site.blog.my.core.config.Constants;
 import com.site.blog.my.core.entity.AdminUser;
 import com.site.blog.my.core.redis.RedisService;
@@ -7,6 +8,7 @@ import com.site.blog.my.core.service.*;
 import com.site.blog.my.core.util.Utils;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
@@ -80,9 +82,11 @@ public class AdminController {
 
     @RequestMapping("verifyCode")
     @ResponseBody
-    public ModelAndView handleRequest(HttpServletRequest request,
-                                      HttpServletResponse response, String username) throws Exception
+    public ModelAndView handleRequest(HttpServletResponse response, String username) throws Exception
     {
+        if(StringUtils.isEmpty(username)){
+            throw new MyException(HttpStatus.INTERNAL_SERVER_ERROR.value(),"请输入用户信息！！！");
+        }
         log.info("登录用户：" + username);
 
         BufferedImage buffImg = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
