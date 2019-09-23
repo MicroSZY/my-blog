@@ -115,7 +115,7 @@ public class GlobalExceptionHandler
     }
 
     @ExceptionHandler(value = MyException.class)
-    public MyResult livegameExceptionExceptionHandler(MyResult e){
+    public MyResult livegameExceptionExceptionHandler(MyException e){
         log.error(e.getMsg());
         MyResult result = new MyResult();
         result.setCode(e.getCode());
