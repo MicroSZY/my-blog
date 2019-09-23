@@ -39,20 +39,26 @@ spring:
 
 # mybatis config
 mybatis:
-  #\u5F53mybatis\u7684xml\u6587\u4EF6\u548Cmapper\u63A5\u53E3\u4E0D\u5728\u76F8\u540C\u5305\u4E0B\u65F6
-  #\u9700\u8981\u7528mapperLocations\u5C5E\u6027\u6307\u5B9Axml\u6587\u4EF6\u7684\u8DEF\u5F84\u3002
-  #*\u662F\u4E2A\u901A\u914D\u7B26\uFF0C\u4EE3\u8868\u6240\u6709\u7684\u6587\u4EF6\uFF0C**\u4EE3\u8868\u6240\u6709\u76EE\u5F55\u4E0B
+  # 当mybatis的xml文件和mapper接口不在相同包下时
+  # 需要用mapperLocations属性指定xml文件的路径。
+  # *是个通配符，代表所有的文件，**代表所有目录下
   mapper-locations: classpath:mapper/*Mapper.xml
+  # 指定bean所在包
+  # 在mapper.xml中可以使用别名而不使用类的全路径名
+  type-aliases-package: com.site.blog.my.core.entity
+  # spring boot集成mybatis的方式打印sql
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
-#pagehelper\u5206\u9875\u63D2\u4EF6
+#pagehelper分页插件
 pagehelper:
-  # \u6307\u5B9A\u6570\u636E\u5E93\uFF0C\u4E0D\u6307\u5B9A\u7684\u8BDD\u4F1A\u9ED8\u8BA4\u81EA\u52A8\u68C0\u6D4B\u6570\u636E\u5E93\u7C7B\u578B
+  # 指定数据库，不指定的话会默认自动检测数据库类型
   helper-dialect: mysql
-  # \u662F\u5426\u542F\u7528\u5206\u9875\u5408\u7406\u5316\u3002\u5982\u679C\u542F\u7528\uFF0C\u5F53pagenum<1\u65F6\uFF0C\u4F1A\u81EA\u52A8\u67E5\u8BE2\u7B2C\u4E00\u9875\u7684\u6570\u636E\uFF0C\u5F53pagenum>pages\u65F6\uFF0C\u81EA\u52A8\u67E5\u8BE2\u6700\u540E\u4E00\u9875\u6570\u636E\uFF1B\u4E0D\u542F\u7528\u7684\uFF0C\u4EE5\u4E0A\u4E24\u79CD\u60C5\u51B5\u90FD\u4F1A\u8FD4\u56DE\u7A7A\u6570\u636E
+  # 是否启用分页合理化。如果启用，当pagenum<1时，会自动查询第一页的数据，当pagenum>pages时，自动查询最后一页数据；不启用的，以上两种情况都会返回空数据
   reasonable: true
-  # \u7528\u4E8E\u4ECE\u5BF9\u8C61\u4E2D\u6839\u636E\u5C5E\u6027\u540D\u53D6\u503C\uFF0C \u53EF\u4EE5\u914D\u7F6E pageNum,pageSize,count,pageSizeZero,reasonable\uFF0C\u4E0D\u914D\u7F6E\u6620\u5C04\u7684\u7528\u9ED8\u8BA4\u503C\uFF0C \u9ED8\u8BA4\u503C\u4E3ApageNum=pageNum;pageSize=pageSize;count=countSql;reasonable=reasonable;pageSizeZero=pageSizeZero
+  # 用于从对象中根据属性名取值， 可以配置 pageNum,pageSize,count,pageSizeZero,reasonable，不配置映射的用默认值， 默认值为pageNum=pageNum;pageSize=pageSize;count=countSql;reasonable=reasonable;pageSizeZero=pageSizeZero
   params: count=countSql
-  # \u9ED8\u8BA4\u503Cfalse\uFF0C\u5206\u9875\u63D2\u4EF6\u4F1A\u4ECE\u67E5\u8BE2\u65B9\u6CD5\u7684\u53C2\u6570\u503C\u4E2D\uFF0C\u81EA\u52A8\u6839\u636E\u4E0A\u9762 params \u914D\u7F6E\u7684\u5B57\u6BB5\u4E2D\u53D6\u503C\uFF0C\u67E5\u627E\u5230\u5408\u9002\u7684\u503C\u65F6\u5C31\u4F1A\u81EA\u52A8\u5206\u9875\u3002\uFF08copy\u6765\u7684\uFF0C\u56E0\u4E3A\u6211\u4E5F\u4E0D\u77E5\u9053\u600E\u4E48\u53BB\u89E3\u91CA\uFF09
+  # 默认值false，分页插件会从查询方法的参数值中，自动根据上面 params 配置的字段中取值，查找到合适的值时就会自动分页。（copy来的，因为我也不知道怎么去解释）
   support-methods-arguments: true
 
 # 打印sql
