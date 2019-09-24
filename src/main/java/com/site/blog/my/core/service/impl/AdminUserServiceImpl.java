@@ -1,15 +1,11 @@
 package com.site.blog.my.core.service.impl;
 
-import com.site.blog.my.core.common.exception.MyException;
-import com.site.blog.my.core.common.jwt.JwtTokenUtil;
 import com.site.blog.my.core.dao.AdminUserMapper;
 import com.site.blog.my.core.entity.AdminUser;
 import com.site.blog.my.core.redis.RedisService;
 import com.site.blog.my.core.service.AdminUserService;
 import com.site.blog.my.core.util.MD5Util;
-import com.site.blog.my.core.util.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -27,14 +23,14 @@ public class AdminUserServiceImpl implements AdminUserService {
     @Resource
     private AdminUserMapper adminUserMapper;
 
-    @Resource
-    private AuthenticationManager authenticationManager;
+//    @Resource
+//    private AuthenticationManager authenticationManager;
 
-    @Resource
-    private UserDetailsService userDetailsService;
+//    @Resource
+//    private UserDetailsService userDetailsService;
 
-    @Autowired
-    private JwtTokenUtil jwtTokenUtil;
+//    @Autowired
+//    private JwtTokenUtil jwtTokenUtil;
 
     @Autowired
     private RedisService redisService;
@@ -86,17 +82,17 @@ public class AdminUserServiceImpl implements AdminUserService {
         return false;
     }
 
-    @Override
-    public String getToken(AdminUser adminUser, HttpServletRequest request) {
-        UsernamePasswordAuthenticationToken upToken = new UsernamePasswordAuthenticationToken(adminUser.getLoginUserName(), adminUser.getLoginPassword());
-        Authentication authentication = authenticationManager.authenticate(upToken);
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        AdminUser userObj = (AdminUser) userDetailsService.loadUserByUsername(adminUser.getLoginUserName());
-        if(userObj == null)
-        {
-            return "";
-        }
-        String token = jwtTokenUtil.generateToken((UserDetails) userObj);
-        return token;
-    }
+//    @Override
+//    public String getToken(AdminUser adminUser, HttpServletRequest request) {
+//        UsernamePasswordAuthenticationToken upToken = new UsernamePasswordAuthenticationToken(adminUser.getLoginUserName(), adminUser.getLoginPassword());
+//        Authentication authentication = authenticationManager.authenticate(upToken);
+//        SecurityContextHolder.getContext().setAuthentication(authentication);
+//        AdminUser userObj = (AdminUser) userDetailsService.loadUserByUsername(adminUser.getLoginUserName());
+//        if(userObj == null)
+//        {
+//            return "";
+//        }
+//        String token = jwtTokenUtil.generateToken((UserDetails) userObj);
+//        return token;
+//    }
 }

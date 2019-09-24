@@ -44,6 +44,6 @@ public interface AdminUserService {
      * @author YY
      * @date 2019/9/23/023 
      */
-    String getToken(AdminUser adminUser, HttpServletRequest request);
+    //String getToken(AdminUser adminUser, HttpServletRequest request);
 
 }

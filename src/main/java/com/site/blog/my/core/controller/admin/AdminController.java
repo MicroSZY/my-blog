@@ -181,8 +181,8 @@ public class AdminController {
         } else {
             redisService.setBackUser(String.valueOf(user.getAdminUserId()), Utils.getIp(request));
         }
-        String token = adminUserService.getToken(user,request);
-        return new MyResult(token);
+//        String token = adminUserService.getToken(user,request);
+        return new MyResult(username);
     }
 
     @PostMapping(value = "/login")
