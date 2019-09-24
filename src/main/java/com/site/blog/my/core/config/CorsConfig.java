@@ -3,11 +3,18 @@ package com.site.blog.my.core.config;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
+/**
+ * @description  跨域配置类
+ * @author YY
+ * @date 2019/9/24/024
+ */
 @Configuration
+@Order(0)
 public class CorsConfig {
 
     @Bean
