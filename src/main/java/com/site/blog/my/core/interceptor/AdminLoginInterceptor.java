@@ -1,5 +1,6 @@
 package com.site.blog.my.core.interceptor;
 
+import com.site.blog.my.core.util.Utils;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -20,7 +21,7 @@ public class AdminLoginInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object o) throws Exception {
         String uri = request.getRequestURI();
-        log.info("进入拦截器的请求：" + uri);
+        log.info("进入拦截器的请求：" + uri + ",地址：" + Utils.getIp(request));
         if (uri.startsWith("/admin") && null == request.getSession().getAttribute("loginUser")) {
             request.getSession().setAttribute("errorMsg", "请重新登陆");
             response.sendRedirect(request.getContextPath() + "/admin/login");

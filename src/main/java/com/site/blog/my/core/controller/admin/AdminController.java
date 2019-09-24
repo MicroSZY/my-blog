@@ -163,6 +163,16 @@ public class AdminController {
         return null;
     }
 
+    /**
+     * @description /admin/loginNew
+     * @param: username
+     * @param: password
+     * @param: verifyCode
+     * @param: request
+     * @return com.site.blog.my.core.common.MyResult
+     * @author YY
+     * @date 2019/9/24/024
+     */
     @RequestMapping("loginNew")
     public MyResult loginNew(String username,String password, String verifyCode,HttpServletRequest request){
         if (StringUtils.isEmpty(verifyCode)) {
