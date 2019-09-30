@@ -1,7 +1,7 @@
 package com.site.blog.my.core.config;
 
 /**
- * Created by 13 on 2019/5/24.
+ * Created by szy on 2019/5/24.
  */
 public class Constants {
 

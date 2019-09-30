@@ -53,7 +53,7 @@ mybatis:
 # 打印sql(这个方式和上面那个打印sql的效果是一样的，但是这个可以指定包下的sql打印，所以我们这里用这个)
 logging:
   level:
-    com.site.blog.my.core.dao: debug
+    com.site.blog.my.core.dao: info
 
 #pagehelper分页插件
 pagehelper:
