@@ -3,7 +3,7 @@ server:
   max-http-header-size: 8192
 
 spring:
-  # datasource config
+  # mysql配置
   datasource:
     name: my-blog-datasource
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -19,7 +19,7 @@ spring:
       max-lifetime: 1800000
       connection-timeout: 30000
       connection-test-query: SELECT 1
-  # redis config
+  # redis配置
   redis:
     host: 120.24.94.30
     password: shen853323110.
